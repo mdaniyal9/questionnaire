@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:questionnaire/ui/questionnaire_vm.dart';
+import 'package:questionnaire/ui/questionnaire_widgets/multi_choice/multi_choice_vu.dart';
 import 'package:questionnaire/ui/questionnaire_widgets/multi_line/multi_line_vu.dart';
 import 'package:questionnaire/ui/questionnaire_widgets/single_choice/single_choice_vu.dart';
 import 'package:questionnaire/ui/questionnaire_widgets/single_line/single_line_vu.dart';
@@ -91,7 +92,7 @@ class QuestionnaireVU extends ViewModelBuilderWidget<QuestionnaireViewModel> {
                   : questionnaire.answerType == 'multi_line'
                   ? MultiLineVU(questionnaire, viewModel.onAddToList, viewModel.notificationController)
                   : questionnaire.answerType == 'multi_choice'
-                  ? Container()//MultiChoiceQuestion( questionnaire)
+                  ? MultiChoiceVU(questionnaire, viewModel.onAddToList, viewModel.notificationController)//MultiChoiceQuestion( questionnaire)
                   : SingleChoiceVU(questionnaire, viewModel.onAddToList, viewModel.notificationController),
             ],
           ),

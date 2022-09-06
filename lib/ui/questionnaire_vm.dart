@@ -24,6 +24,14 @@ class QuestionnaireViewModel extends BaseViewModel {
         null,
         [Options('Yes', false), Options('No', false)],
         null));
+    questions.add(GetQuestionnaire(
+        'ID3',
+        'AP-ID3',
+        'What did You eat?',
+        'multi_choice',
+        null,
+        [Options('Daal Chawal', false), Options('Savour Pulao', false), Options('Lassi', false),Options('Pizza', false)],
+        null));
   }
 
   onAddToList(Answers value) {
@@ -33,7 +41,7 @@ class QuestionnaireViewModel extends BaseViewModel {
     answers.removeWhere((row) => (row.questionId == value.questionId));
     answers.add(value);
     for (var answer in answers) {
-      debugPrint('${answer.answer}-------> ${answer.selectedOption}');
+      debugPrint('${answer.answer}    ${answer.question}-------> ${answer.selectedOption}');
     }
     debugPrint('\n');
   }
