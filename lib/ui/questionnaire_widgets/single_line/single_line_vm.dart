@@ -11,7 +11,7 @@ class SingleLineViewModel extends BaseViewModel
   FocusNode focus = FocusNode();
   Answers? answer;
   String myAnswer = '';
-  final GetQuestionnaire questionnaire;
+  GetQuestionnaire questionnaire;
   final Function(Answers answer) callBack;
   late StreamController<String> controller;
   late StreamSubscription subscription;
@@ -62,6 +62,7 @@ class SingleLineViewModel extends BaseViewModel
         return;
       }
     debugPrint('Pass');
+    questionnaire.answer = myAnswer;
     answer = Answers(questionId: questionnaire.questionId, question: questionnaire.question, answerType: questionnaire.answerType, answer: myAnswer, options: null, selectedOption: null);
   }
 
