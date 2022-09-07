@@ -14,67 +14,75 @@ class QuestionnaireVU extends ViewModelBuilderWidget<QuestionnaireViewModel> {
   @override
   Widget builder(
       BuildContext context, QuestionnaireViewModel viewModel, Widget? child) {
-    return Column(
-      children: [
-        ExpansionPanelList(
-          expansionCallback: (int index, bool isExpanded){
-            for(int i = 0; i<viewModel.questions.length; i++){
-              viewModel.questions[i].isExpanded = false;
-            }
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(20,16, 20, 20),
+        child: ListView(
+          children: [ExpansionPanelList(
+            dividerColor: Colors.green,
 
-            viewModel.questions[index].isExpanded = !isExpanded;
-            debugPrint('Expansion Index $index');
-            viewModel.notifyListeners();
-          },
-          children: viewModel.questions.map<ExpansionPanel>((e){
-            return ExpansionPanel(
-                headerBuilder: (BuildContext context, bool isExpanded){
-                  return ListTile(
-                    title: Row(
+            expandedHeaderPadding: EdgeInsets.only(bottom: 0),
+            expansionCallback: (int index, bool isExpanded){
+              for(int i = 0; i<viewModel.questions.length; i++){
+                viewModel.questions[i].isExpanded = false;
+              }
+
+              viewModel.questions[index].isExpanded = !isExpanded;
+              debugPrint('Expansion Index $index');
+              viewModel.notifyListeners();
+            },
+            children:
+
+            viewModel.questions.map<ExpansionPanel>((e){
+              return ExpansionPanel(
+                canTapOnHeader: true,
+                  headerBuilder: (BuildContext context, bool isExpanded){
+                    return ListTile(
+                      title: Text(
+                        e.question!,
+                        maxLines: 4,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
+                  },
+                  body: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Column(
                       children: [
-                        Expanded(
-                          child: Text(
-                            e.question!,
-                            maxLines: 4,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                        const Divider(
+                          color: Color.fromARGB(255, 194, 194, 194),
                         ),
-                        const SizedBox(
-                          width: 8,
-                        ),
+                        e.answerType == 'single_line'
+                            ? SingleLineVU(e, viewModel.onAddToList, viewModel.notificationController)
+                            : e.answerType == 'multi_line'
+                            ? MultiLineVU(e, viewModel.onAddToList, viewModel.notificationController)
+                            : e.answerType == 'multi_choice'
+                            ? MultiChoiceVU(e, viewModel.onAddToList, viewModel.notificationController)//MultiChoiceQuestion( questionnaire)
+                            : SingleChoiceVU(e, viewModel.onAddToList, viewModel.notificationController),
                       ],
                     ),
-                  );
-                },
-                body: Column(
-                  children: [
-                    const Divider(
-                      color: Color.fromARGB(255, 194, 194, 194),
-                    ),
-                    e.answerType == 'single_line'
-                        ? SingleLineVU(e, viewModel.onAddToList, viewModel.notificationController)
-                        : e.answerType == 'multi_line'
-                        ? MultiLineVU(e, viewModel.onAddToList, viewModel.notificationController)
-                        : e.answerType == 'multi_choice'
-                        ? MultiChoiceVU(e, viewModel.onAddToList, viewModel.notificationController)//MultiChoiceQuestion( questionnaire)
-                        : SingleChoiceVU(e, viewModel.onAddToList, viewModel.notificationController),
-                  ],
-                ),
-            isExpanded: e.isExpanded);
-          }).toList(),
+                  ),
+                  isExpanded: e.isExpanded);
+            }).toList(),
+          )],
         ),
-        ElevatedButton(
-          onPressed: () {
-            viewModel.focus.requestFocus();
-            viewModel.answers.clear();
-            viewModel.notificationController.sink.add('GetData');
-          },
-          focusNode: viewModel.focus,
-          child: const Text('Get Focus'),
-        ),
-      ],
+      ),
+      bottomSheet: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              viewModel.focus.requestFocus();
+              viewModel.answers.clear();
+              viewModel.notificationController.sink.add('GetData');
+            },
+            focusNode: viewModel.focus,
+            child: const Text('Get Focus'),
+          ),
+        ],
+      ),
     );
   }
 

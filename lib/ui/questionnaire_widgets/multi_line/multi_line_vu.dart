@@ -26,6 +26,7 @@ class MultiLineVU extends ViewModelBuilderWidget<MultiLineViewModel> {
         maxLines: 4,
         focusNode: viewModel.focus,
         decoration: const InputDecoration(
+          border: InputBorder.none,
           hintText: 'don\'t_write_your_answer_here',
           hintStyle: TextStyle(
             color: Color.fromARGB(255, 194, 194, 194),),),

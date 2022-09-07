@@ -15,21 +15,18 @@ class SingleChoiceVU extends ViewModelBuilderWidget<SingleChoiceViewModel> {
   late StreamController<String> controller;
   @override
   Widget builder(BuildContext context, SingleChoiceViewModel viewModel, Widget? child) {
-      return
-
-        ListView.builder(
+      return ListView.builder(
             itemCount: questionnaire.options!.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext context,index){
-              return ListTile(
+              return RadioListTile(
                 visualDensity: VisualDensity.compact,
-                title: Text(questionnaire.options![index].option!),
-                leading: Radio(
-                    value: questionnaire.options![index].option!,
-                    groupValue: questionnaire.selectedOption == null ? '' : questionnaire.selectedOption![0],
-                    onChanged: (dynamic v) {
-                      viewModel.onRadioBtn(v, index, questionnaire);
-                    }),
+                  value: questionnaire.options![index].option!,
+                  groupValue: questionnaire.selectedOption == null ? viewModel.answer == null ? '' : viewModel.answer!.selectedOption![0] : questionnaire.selectedOption![0],
+                  onChanged: (dynamic v) {
+                    viewModel.onRadioBtn(v, index, questionnaire);
+                  },
+                  title: Text(questionnaire.options![index].option!),
               );
             });
     }

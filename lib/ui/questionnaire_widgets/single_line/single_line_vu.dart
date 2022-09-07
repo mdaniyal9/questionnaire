@@ -26,6 +26,7 @@ class SingleLineVU extends ViewModelBuilderWidget<SingleLineViewModel> {
         maxLines: 1,
         focusNode: viewModel.focus,
         decoration: const InputDecoration(
+          border: InputBorder.none,
             hintText: 'write_your_answer_here',
             hintStyle: TextStyle(
                 color: Color.fromARGB(255, 194, 194, 194),),),

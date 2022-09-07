@@ -5,9 +5,7 @@ void main() {
   runApp(
     const MaterialApp(
       home: SafeArea(
-        child: Scaffold(
-          body: QuestionnaireVU(),
-        ),
+        child: QuestionnaireVU(),
       ),
     ),
   );
