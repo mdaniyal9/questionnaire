@@ -37,7 +37,8 @@ class MultiChoiceViewModel extends BaseViewModel{
       if(!isDataExist(questionnaire.options![index].option!)){
         selectedOptions.add(questionnaire.options![index].option!);
       };
-      answer = Answers(question: questionnaire.question, answerType : questionnaire.answerType, selectedOption : selectedOptions, options: option);
+      questionnaire.selectedOption = selectedOptions;
+      // answer = Answers(question: questionnaire.question, answerType : questionnaire.answerType, selectedOption : selectedOptions, options: option);
     }else{
         questionnaire.options![index].isCheck = v!;
         List<Options>? options = questionnaire.options;
@@ -50,7 +51,8 @@ class MultiChoiceViewModel extends BaseViewModel{
         if(isDataExist(questionnaire.options![index].option!)){
           selectedOptions.remove(questionnaire.options![index].option!);
         };
-        answer = Answers(question: questionnaire.question, answerType : questionnaire.answerType, selectedOption : selectedOptions, options: option);
+        questionnaire.selectedOption = selectedOptions;
+        // answer = Answers(question: questionnaire.question, answerType : questionnaire.answerType, selectedOption : selectedOptions, options: option);
       }
 
     notifyListeners();

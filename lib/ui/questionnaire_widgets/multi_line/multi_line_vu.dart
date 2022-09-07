@@ -17,8 +17,9 @@ class MultiLineVU extends ViewModelBuilderWidget<MultiLineViewModel> {
     return Form(
       key: viewModel.formKey,
       child: TextFormField(
-        onSaved: (v){
-          debugPrint('ON Saved called');
+        onChanged: (value){
+          viewModel.onSaved();
+          questionnaire.answer = value;
         },
         initialValue: viewModel.questionnaire.answer ?? '',
         validator: viewModel.onValidate,

@@ -102,9 +102,13 @@ class QuestionnaireVU extends ViewModelBuilderWidget<QuestionnaireViewModel> {
         children: [
           ElevatedButton(
             onPressed: () {
-              viewModel.focus.requestFocus();
-              viewModel.answers.clear();
+              // viewModel.focus.requestFocus();
+              // viewModel.answers.clear();
               viewModel.notificationController.sink.add('GetData');
+              for(var question in viewModel.questions) {
+                debugPrint(question.answer);
+                debugPrint(question.selectedOption.toString());
+              }
             },
             focusNode: viewModel.focus,
             child: const Text('Get Focus'),

@@ -21,9 +21,9 @@ class SingleLineViewModel extends BaseViewModel
   {
     debugPrint('Build is being called IN VM');
 
-    focus.addListener(onFocusChanged);
+    // focus.addListener(onFocusChanged);
     subscription = controller.stream.listen((String data) {
-      if(answer!.answer == null){
+      if(answer == null){
         if(!formKey.currentState!.validate())
         {
           debugPrint('Error');
@@ -62,8 +62,8 @@ class SingleLineViewModel extends BaseViewModel
         return;
       }
     debugPrint('Pass');
-    questionnaire.answer = myAnswer;
-    answer = Answers(questionId: questionnaire.questionId, question: questionnaire.question, answerType: questionnaire.answerType, answer: myAnswer, options: null, selectedOption: null);
+    // questionnaire.answer = myAnswer;
+    // answer = Answers(questionId: questionnaire.questionId, question: questionnaire.question, answerType: questionnaire.answerType, answer: myAnswer, options: null, selectedOption: null);
   }
 
 

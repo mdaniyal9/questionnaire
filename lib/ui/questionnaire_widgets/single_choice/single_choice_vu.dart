@@ -24,7 +24,7 @@ class SingleChoiceVU extends ViewModelBuilderWidget<SingleChoiceViewModel> {
                   value: questionnaire.options![index].option!,
                   groupValue: questionnaire.selectedOption == null ? viewModel.answer == null ? '' : viewModel.answer!.selectedOption![0] : questionnaire.selectedOption![0],
                   onChanged: (dynamic v) {
-                    viewModel.onRadioBtn(v, index, questionnaire);
+                    viewModel.onRadioBtn(v, questionnaire);
                   },
                   title: Text(questionnaire.options![index].option!),
               );

@@ -25,23 +25,23 @@ class SingleChoiceViewModel extends BaseViewModel {
     });
   }
 
-  onRadioBtn(String? value, int i, GetQuestionnaire questionnaire) {
+  onRadioBtn(String? value, GetQuestionnaire questionnaire) {
     // v = value!;
     questionnaire.selectedOption![0] = value!;
-    List<Options>? options = questionnaire.options;
-    List<String>? option = options!
-        .map((op) {
-          return op.option;
-        })
-        .cast<String>()
-        .toList();
-    List<String> optionsss = [value];
-    answer = Answers(
-        questionId: questionnaire.questionId,
-        question: questionnaire.question,
-        answerType: questionnaire.answerType,
-        options: option,
-        selectedOption: optionsss);
+    // List<Options>? options = questionnaire.options;
+    // List<String>? option = options!
+    //     .map((op) {
+    //       return op.option;
+    //     })
+    //     .cast<String>()
+    //     .toList();
+    // List<String> optionsss = [value];
+    // answer = Answers(
+    //     questionId: questionnaire.questionId,
+    //     question: questionnaire.question,
+    //     answerType: questionnaire.answerType,
+    //     options: option,
+    //     selectedOption: optionsss);
     notifyListeners();
   }
 }

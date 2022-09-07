@@ -17,7 +17,7 @@ class MultiLineViewModel extends BaseViewModel
 
   MultiLineViewModel(this.questionnaire, this.callBack, this.controller)
   {
-    focus.addListener(onFocusChanged);
+    // focus.addListener(onFocusChanged);
     controller.stream.listen((String data) {
       if(answer == null){
         if(!formKey.currentState!.validate())
@@ -58,7 +58,7 @@ class MultiLineViewModel extends BaseViewModel
       return;
     }
     debugPrint('Pass');
-    answer = Answers(questionId: questionnaire.questionId, question: questionnaire.question, answerType: questionnaire.answerType, answer: myAnswer, options: null, selectedOption: null);
+    // answer = Answers(questionId: questionnaire.questionId, question: questionnaire.question, answerType: questionnaire.answerType, answer: myAnswer, options: null, selectedOption: null);
   }
 
 
