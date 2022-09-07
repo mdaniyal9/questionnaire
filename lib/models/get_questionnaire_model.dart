@@ -4,11 +4,12 @@ class GetQuestionnaire{
   String? question;
   String? answerType;
   String? answer;
-  List<Options>? option;
+  List<Options>? options;
   List<dynamic>? selectedOption;
+  bool isExpanded = false;
 
 
-  GetQuestionnaire(this.questionId,this.appointmentId,this.question,this.answerType,this.answer,this.option,this.selectedOption);
+  GetQuestionnaire(this.questionId,this.appointmentId,this.question,this.answerType,this.answer,this.options,this.selectedOption);
 
   factory GetQuestionnaire.fromMap(Map<String, dynamic> resp,) {
     final List<dynamic>? option = resp['options'];

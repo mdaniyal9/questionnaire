@@ -11,16 +11,16 @@ class SingleLineVU extends ViewModelBuilderWidget<SingleLineViewModel> {
   final Function(Answers answer) callBack;
   late StreamController<String> controller;
 
-
   @override
   Widget builder(BuildContext context, SingleLineViewModel viewModel, Widget? child) {
+    debugPrint('Build is being called');
     return Form(
       key: viewModel.formKey,
       child: TextFormField(
         onSaved: (v){
           debugPrint('ON Saved called');
         },
-        initialValue: viewModel.questionnaire.answer ?? '',
+        initialValue: viewModel.questionnaire.answer ?? (viewModel.answer == null ? '' : viewModel.answer!.answer),
         validator: viewModel.onValidate,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         maxLines: 1,

@@ -18,15 +18,15 @@ class SingleChoiceVU extends ViewModelBuilderWidget<SingleChoiceViewModel> {
       return
 
         ListView.builder(
-            itemCount: questionnaire.option!.length,
+            itemCount: questionnaire.options!.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext context,index){
               return ListTile(
                 visualDensity: VisualDensity.compact,
-                title: Text(questionnaire.option![index].option!),
+                title: Text(questionnaire.options![index].option!),
                 leading: Radio(
-                    value: questionnaire.option![index].option!,
-                    groupValue: viewModel.v,
+                    value: questionnaire.options![index].option!,
+                    groupValue: questionnaire.selectedOption == null ? '' : questionnaire.selectedOption![0],
                     onChanged: (dynamic v) {
                       viewModel.onRadioBtn(v, index, questionnaire);
                     }),

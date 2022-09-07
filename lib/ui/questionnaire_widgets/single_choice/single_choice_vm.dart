@@ -27,7 +27,7 @@ class SingleChoiceViewModel extends BaseViewModel {
 
   onRadioBtn(String? value, int i, GetQuestionnaire questionnaire) {
     v = value!;
-    List<Options>? options = questionnaire.option;
+    List<Options>? options = questionnaire.options;
     List<String>? option = options!
         .map((op) {
           return op.option;

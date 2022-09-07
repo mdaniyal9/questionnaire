@@ -16,13 +16,13 @@ class MultiChoiceVU extends ViewModelBuilderWidget<MultiChoiceViewModel> {
   Widget builder(BuildContext context, MultiChoiceViewModel viewModel, Widget? child) {
     return
       ListView.builder(
-          itemCount: questionnaire.option!.length,
+          itemCount: questionnaire.options!.length,
           shrinkWrap: true,
           itemBuilder: (BuildContext context,index){
               return CheckboxListTile(
                   controlAffinity: ListTileControlAffinity.leading,
-                  title: Text(questionnaire.option![index].option!),
-                  value: questionnaire.option![index].isCheck,
+                  title: Text(questionnaire.options![index].option!),
+                  value: questionnaire.options![index].isCheck,
                   onChanged: (v){
                     viewModel.onClickCheckBox(questionnaire, index, v);
                   });

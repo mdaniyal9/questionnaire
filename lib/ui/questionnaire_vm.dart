@@ -23,7 +23,7 @@ class QuestionnaireViewModel extends BaseViewModel {
         'single_choice',
         null,
         [Options('Yes', false), Options('No', false)],
-        null));
+        ['No']));
     questions.add(GetQuestionnaire(
         'ID3',
         'AP-ID3',

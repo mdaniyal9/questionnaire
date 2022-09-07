@@ -14,13 +14,16 @@ class SingleLineViewModel extends BaseViewModel
   final GetQuestionnaire questionnaire;
   final Function(Answers answer) callBack;
   late StreamController<String> controller;
+  late StreamSubscription subscription;
 
 
   SingleLineViewModel(this.questionnaire, this.callBack, this.controller)
   {
+    debugPrint('Build is being called IN VM');
+
     focus.addListener(onFocusChanged);
-    controller.stream.listen((String data) {
-      if(answer == null){
+    subscription = controller.stream.listen((String data) {
+      if(answer!.answer == null){
         if(!formKey.currentState!.validate())
         {
           debugPrint('Error');
@@ -65,6 +68,9 @@ class SingleLineViewModel extends BaseViewModel
 
   @override
   void dispose() {
+    if (subscription != null) {
+      subscription.cancel();
+    }
     focus.removeListener(onFocusChanged);
     focus.dispose();
   }

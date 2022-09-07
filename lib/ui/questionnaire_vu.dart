@@ -16,17 +16,54 @@ class QuestionnaireVU extends ViewModelBuilderWidget<QuestionnaireViewModel> {
       BuildContext context, QuestionnaireViewModel viewModel, Widget? child) {
     return Column(
       children: [
-        Expanded(
-          child: ListView.builder(
-              itemCount: viewModel.questions.length,
-              itemBuilder: (_, index) {
-                // if(viewModel.questions[index].answerType == 'single_line') {
-                //   return SingleLineVU(viewModel.questions[index], viewModel.onAddToList, viewModel.notificationController);
-                // } else if(viewModel.questions[index].answerType == 'multi_line') {
-                //   return MultiLineVU(viewModel.questions[index], viewModel.onAddToList, viewModel.notificationController);
-                // }
-                return questionBox(context, viewModel, viewModel.questions[index], index);
-              }),
+        ExpansionPanelList(
+          expansionCallback: (int index, bool isExpanded){
+            for(int i = 0; i<viewModel.questions.length; i++){
+              viewModel.questions[i].isExpanded = false;
+            }
+
+            viewModel.questions[index].isExpanded = !isExpanded;
+            debugPrint('Expansion Index $index');
+            viewModel.notifyListeners();
+          },
+          children: viewModel.questions.map<ExpansionPanel>((e){
+            return ExpansionPanel(
+                headerBuilder: (BuildContext context, bool isExpanded){
+                  return ListTile(
+                    title: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            e.question!,
+                            maxLines: 4,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                body: Column(
+                  children: [
+                    const Divider(
+                      color: Color.fromARGB(255, 194, 194, 194),
+                    ),
+                    e.answerType == 'single_line'
+                        ? SingleLineVU(e, viewModel.onAddToList, viewModel.notificationController)
+                        : e.answerType == 'multi_line'
+                        ? MultiLineVU(e, viewModel.onAddToList, viewModel.notificationController)
+                        : e.answerType == 'multi_choice'
+                        ? MultiChoiceVU(e, viewModel.onAddToList, viewModel.notificationController)//MultiChoiceQuestion( questionnaire)
+                        : SingleChoiceVU(e, viewModel.onAddToList, viewModel.notificationController),
+                  ],
+                ),
+            isExpanded: e.isExpanded);
+          }).toList(),
         ),
         ElevatedButton(
           onPressed: () {
@@ -61,12 +98,20 @@ class QuestionnaireVU extends ViewModelBuilderWidget<QuestionnaireViewModel> {
             horizontal: 12.0,
           ),
           child: ExpansionTile(
+            onExpansionChanged: (value){
+              for(int i = 0; i<viewModel.questions.length; i++){
+                viewModel.questions[i].isExpanded = false;
+              }
 
+              viewModel.questions[index].isExpanded = !viewModel.questions[index].isExpanded;
+              debugPrint('Expansion Index $index');
+              viewModel.notifyListeners();
+            },
             tilePadding: EdgeInsets.zero,
             childrenPadding: EdgeInsets.zero,
             iconColor: Colors.black,
             textColor: Colors.black,
-            initiallyExpanded: index == 0 ? true : false,
+            initiallyExpanded: viewModel.questions[index].isExpanded,//index == 0 ? true : false,
             title: Row(
               children: [
                 Expanded(

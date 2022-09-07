@@ -25,8 +25,8 @@ class MultiChoiceViewModel extends BaseViewModel{
   }
     onClickCheckBox( GetQuestionnaire questionnaire, int index, v, ){
       if (v == true){
-      questionnaire.option![index].isCheck = v!;
-      List<Options>? options = questionnaire.option;
+      questionnaire.options![index].isCheck = v!;
+      List<Options>? options = questionnaire.options;
       List<String>? option = options!
           .map((op) {
         return op.option;
@@ -34,21 +34,21 @@ class MultiChoiceViewModel extends BaseViewModel{
           .cast<String>()
           .toList();
 
-      if(!isDataExist(questionnaire.option![index].option!)){
-        selectedOptions.add(questionnaire.option![index].option!);
+      if(!isDataExist(questionnaire.options![index].option!)){
+        selectedOptions.add(questionnaire.options![index].option!);
       };
       answer = Answers(question: questionnaire.question, answerType : questionnaire.answerType, selectedOption : selectedOptions, options: option);
     }else{
-        questionnaire.option![index].isCheck = v!;
-        List<Options>? options = questionnaire.option;
+        questionnaire.options![index].isCheck = v!;
+        List<Options>? options = questionnaire.options;
         List<String>? option = options!
             .map((op) {
           return op.option;
         })
             .cast<String>()
             .toList();
-        if(isDataExist(questionnaire.option![index].option!)){
-          selectedOptions.remove(questionnaire.option![index].option!);
+        if(isDataExist(questionnaire.options![index].option!)){
+          selectedOptions.remove(questionnaire.options![index].option!);
         };
         answer = Answers(question: questionnaire.question, answerType : questionnaire.answerType, selectedOption : selectedOptions, options: option);
       }
