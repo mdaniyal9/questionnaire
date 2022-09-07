@@ -14,11 +14,13 @@ class MultiLineViewModel extends BaseViewModel
   final GetQuestionnaire questionnaire;
   final Function(Answers answer) callBack;
   late StreamController<String> controller;
+  late StreamSubscription subscription;
+
 
   MultiLineViewModel(this.questionnaire, this.callBack, this.controller)
   {
     // focus.addListener(onFocusChanged);
-    controller.stream.listen((String data) {
+    subscription = controller.stream.listen((String data) {
       if(answer == null){
         if(!formKey.currentState!.validate())
         {
@@ -64,6 +66,9 @@ class MultiLineViewModel extends BaseViewModel
 
   @override
   void dispose() {
+    if (subscription != null) {
+      subscription.cancel();
+    }
     focus.removeListener(onFocusChanged);
     focus.dispose();
   }

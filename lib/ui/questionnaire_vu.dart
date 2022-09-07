@@ -105,10 +105,7 @@ class QuestionnaireVU extends ViewModelBuilderWidget<QuestionnaireViewModel> {
               // viewModel.focus.requestFocus();
               // viewModel.answers.clear();
               viewModel.notificationController.sink.add('GetData');
-              for(var question in viewModel.questions) {
-                debugPrint(question.answer);
-                debugPrint(question.selectedOption.toString());
-              }
+              viewModel.addData();
             },
             focusNode: viewModel.focus,
             child: const Text('Get Focus'),
@@ -170,8 +167,8 @@ class QuestionnaireVU extends ViewModelBuilderWidget<QuestionnaireViewModel> {
                   : questionnaire.answerType == 'multi_line'
                   ? MultiLineVU(questionnaire, viewModel.onAddToList, viewModel.notificationController)
                   : questionnaire.answerType == 'multi_choice'
-                  ? MultiChoiceVU(questionnaire, viewModel.onAddToList, viewModel.notificationController)//MultiChoiceQuestion( questionnaire)
-                  : SingleChoiceVU(questionnaire, viewModel.onAddToList, viewModel.notificationController),
+                  ? MultiChoiceVU(questionnaire)//MultiChoiceQuestion( questionnaire)
+                  : SingleChoiceVU(questionnaire),
             ],
           ),
         ),

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -7,10 +5,8 @@ import '../../../models/get_questionnaire_model.dart';
 import 'multi_choice_vm.dart';
 
 class MultiChoiceVU extends ViewModelBuilderWidget<MultiChoiceViewModel> {
-   MultiChoiceVU( this.questionnaire, this.callBack, this.controller,  {Key? key}) : super(key: key);
+   const MultiChoiceVU( this.questionnaire,  {Key? key}) : super(key: key);
   final GetQuestionnaire questionnaire;
-  final Function(Answers answer) callBack;
-  late StreamController<String> controller;
 
   @override
   Widget builder(BuildContext context, MultiChoiceViewModel viewModel, Widget? child) {
@@ -32,7 +28,7 @@ class MultiChoiceVU extends ViewModelBuilderWidget<MultiChoiceViewModel> {
   
   @override
   MultiChoiceViewModel viewModelBuilder(BuildContext context) {
-    return MultiChoiceViewModel(callBack, controller);
+    return MultiChoiceViewModel();
   }
 
 }

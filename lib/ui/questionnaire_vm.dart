@@ -30,7 +30,12 @@ class QuestionnaireViewModel extends BaseViewModel {
         'What did You eat?',
         'multi_choice',
         null,
-        [Options('Daal Chawal', false), Options('Savour Pulao', false), Options('Lassi', false),Options('Pizza', false)],
+        [
+          Options('Daal Chawal', false),
+          Options('Savour Pulao', false),
+          Options('Lassi', false),
+          Options('Pizza', false)
+        ],
         null));
   }
 
@@ -41,18 +46,57 @@ class QuestionnaireViewModel extends BaseViewModel {
     answers.removeWhere((row) => (row.questionId == value.questionId));
     answers.add(value);
     for (var answer in answers) {
-      debugPrint('${answer.answer}    ${answer.question}-------> ${answer.selectedOption}');
+      debugPrint(
+          '${answer.answer}    ${answer.question}-------> ${answer.selectedOption}');
     }
     debugPrint('\n');
   }
 
-  // bool isDataExist(Answers value) {
-  //   // var data = answers.where((row) => (answers.contains(value)));
-  //   var data = answers.where((row) => (answers.contains(value)));
-  //   if (data.length >= 1) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  addData() {
+    int i = 0;
+    for (var question in questions) {
+      debugPrint(question.answer);
+      debugPrint(question.selectedOption.toString());
+      if(question.answerType != 'single_line' && question.answerType != 'multi_line') {
+        List<String>? option = question.options!
+            .map((op) {
+          return op.option;
+        })
+            .cast<String>()
+            .toList();
+
+        List<String> sOptions = question.selectedOption!.map((e) => e.toString()).toList();
+        answers.add(Answers(
+            questionId: question.questionId,
+            question: question.question,
+            answerType: question.answerType,
+            answer: question.answer,
+            options: option,
+            selectedOption: sOptions ));
+      }
+      else{
+        answers.add(Answers(
+            questionId: question.questionId,
+            question: question.question,
+            answerType: question.answerType,
+            answer: question.answer,
+            options: null,
+            selectedOption: null));
+      }
+
+      debugPrint(answers[i].answer);
+      debugPrint(answers[i].selectedOption.toString());
+      i++;
+    }
+  }
+
+// bool isDataExist(Answers value) {
+//   // var data = answers.where((row) => (answers.contains(value)));
+//   var data = answers.where((row) => (answers.contains(value)));
+//   if (data.length >= 1) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 }

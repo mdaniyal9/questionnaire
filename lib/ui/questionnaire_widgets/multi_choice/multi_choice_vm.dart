@@ -6,23 +6,8 @@ import '../../../models/get_questionnaire_model.dart';
 
 class MultiChoiceViewModel extends BaseViewModel{
   List<String> selectedOptions = [];
-  Answers? answer;
 
-  final Function(Answers answer) callBack;
-  late StreamController<String> controller;
 
-  MultiChoiceViewModel(this.callBack, this.controller){
-    controller.stream.listen((String data) {
-      if (answer == null) {
-        debugPrint('Error');
-        return;
-      }
-
-      if (data == 'GetData' && answer != null) {
-        callBack(answer!);
-      }
-    });
-  }
     onClickCheckBox( GetQuestionnaire questionnaire, int index, v, ){
       if (v == true){
       questionnaire.options![index].isCheck = v!;
