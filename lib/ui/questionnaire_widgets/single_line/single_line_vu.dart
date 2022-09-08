@@ -6,9 +6,8 @@ import 'package:questionnaire/ui/questionnaire_widgets/single_line/single_line_v
 import 'package:stacked/stacked.dart';
 
 class SingleLineVU extends ViewModelBuilderWidget<SingleLineViewModel> {
-  SingleLineVU(this.questionnaire, this.callBack, this.controller, {Key? key}) : super(key: key);
+  SingleLineVU(this.questionnaire, this.controller, {Key? key}) : super(key: key);
   final GetQuestionnaire questionnaire;
-  final Function(Answers answer) callBack;
   late StreamController<String> controller;
 
   @override
@@ -37,6 +36,6 @@ class SingleLineVU extends ViewModelBuilderWidget<SingleLineViewModel> {
 
   @override
   SingleLineViewModel viewModelBuilder(BuildContext context) {
-    return SingleLineViewModel(questionnaire, callBack, controller);
+    return SingleLineViewModel(questionnaire, controller);
   }
 }

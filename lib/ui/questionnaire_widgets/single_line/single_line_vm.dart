@@ -12,12 +12,11 @@ class SingleLineViewModel extends BaseViewModel
   Answers? answer;
   String myAnswer = '';
   GetQuestionnaire questionnaire;
-  final Function(Answers answer) callBack;
   late StreamController<String> controller;
   late StreamSubscription subscription;
 
 
-  SingleLineViewModel(this.questionnaire, this.callBack, this.controller)
+  SingleLineViewModel(this.questionnaire, this.controller)
   {
     debugPrint('Build is being called IN VM');
 
@@ -29,10 +28,6 @@ class SingleLineViewModel extends BaseViewModel
           debugPrint('Error');
           return;
         }
-      }
-
-      if(data == 'GetData' && answer != null) {
-        callBack(answer!);
       }
     });
   }

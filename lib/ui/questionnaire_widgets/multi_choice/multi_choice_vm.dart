@@ -1,6 +1,3 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import '../../../models/get_questionnaire_model.dart';
 
@@ -16,13 +13,13 @@ class MultiChoiceViewModel extends BaseViewModel{
 
       if(!isDataExist(questionnaire.options![index].option!)){
         questionnaire.selectedOption!.add(questionnaire.options![index].option!);
-      };
+      }
     }else{
         questionnaire.options![index].isCheck = v!;
 
         if(isDataExist(questionnaire.options![index].option!)){
           questionnaire.selectedOption!.remove(questionnaire.options![index].option!);
-        };
+        }
       }
 
     notifyListeners();
@@ -35,7 +32,7 @@ class MultiChoiceViewModel extends BaseViewModel{
 bool isDataExist(String value) {
   // var data = selectedOptions.where((row) => (selectedOptions.contains(value)));
   var data = questionnaire.selectedOption!.where((row) => (questionnaire.selectedOption!.contains(value)));
-  if (data.length >= 1) {
+  if (data.isNotEmpty) {
     return true;
   } else {
     return false;

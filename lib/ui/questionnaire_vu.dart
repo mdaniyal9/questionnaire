@@ -163,9 +163,9 @@ class QuestionnaireVU extends ViewModelBuilderWidget<QuestionnaireViewModel> {
                 color: Color.fromARGB(255, 194, 194, 194),
               ),
               questionnaire.answerType == 'single_line'
-                  ? SingleLineVU(questionnaire, viewModel.onAddToList, viewModel.notificationController)
+                  ? SingleLineVU(questionnaire, viewModel.notificationController)
                   : questionnaire.answerType == 'multi_line'
-                  ? MultiLineVU(questionnaire, viewModel.onAddToList, viewModel.notificationController)
+                  ? MultiLineVU(questionnaire, viewModel.notificationController)
                   : questionnaire.answerType == 'multi_choice'
                   ? MultiChoiceVU(questionnaire)//MultiChoiceQuestion( questionnaire)
                   : SingleChoiceVU(questionnaire),
