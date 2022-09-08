@@ -12,12 +12,11 @@ class MultiLineViewModel extends BaseViewModel
   Answers? answer;
   String myAnswer = '';
   final GetQuestionnaire questionnaire;
-  final Function(Answers answer) callBack;
   late StreamController<String> controller;
   late StreamSubscription subscription;
 
 
-  MultiLineViewModel(this.questionnaire, this.callBack, this.controller)
+  MultiLineViewModel(this.questionnaire, this.controller)
   {
     // focus.addListener(onFocusChanged);
     subscription = controller.stream.listen((String data) {
@@ -29,9 +28,7 @@ class MultiLineViewModel extends BaseViewModel
         }
       }
 
-      if(data == 'GetData' && answer != null) {
-        callBack(answer!);
-      }
+      
     });
   }
 
@@ -66,9 +63,7 @@ class MultiLineViewModel extends BaseViewModel
 
   @override
   void dispose() {
-    if (subscription != null) {
-      subscription.cancel();
-    }
+    subscription.cancel();
     focus.removeListener(onFocusChanged);
     focus.dispose();
   }

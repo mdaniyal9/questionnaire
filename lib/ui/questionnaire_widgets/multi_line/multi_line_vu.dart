@@ -7,9 +7,8 @@ import 'package:stacked/stacked.dart';
 import '../../../models/get_questionnaire_model.dart';
 
 class MultiLineVU extends ViewModelBuilderWidget<MultiLineViewModel> {
-   MultiLineVU(this.questionnaire, this.callBack, this.controller,  {Key? key}) : super(key: key);
+   MultiLineVU(this.questionnaire, this.controller,  {Key? key}) : super(key: key);
   final GetQuestionnaire questionnaire;
-  final Function(Answers answer) callBack;
   late StreamController<String> controller;
 
   @override
@@ -37,6 +36,6 @@ class MultiLineVU extends ViewModelBuilderWidget<MultiLineViewModel> {
 
   @override
   MultiLineViewModel viewModelBuilder(BuildContext context) {
-    return MultiLineViewModel(questionnaire, callBack, controller);
+    return MultiLineViewModel(questionnaire, controller);
   }
 }

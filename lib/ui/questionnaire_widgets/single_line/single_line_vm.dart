@@ -69,9 +69,7 @@ class SingleLineViewModel extends BaseViewModel
 
   @override
   void dispose() {
-    if (subscription != null) {
-      subscription.cancel();
-    }
+    subscription.cancel();
     focus.removeListener(onFocusChanged);
     focus.dispose();
   }
