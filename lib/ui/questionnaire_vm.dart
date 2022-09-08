@@ -36,7 +36,7 @@ class QuestionnaireViewModel extends BaseViewModel {
           Options('Lassi', false),
           Options('Pizza', false)
         ],
-        null));
+        ['Daal Chawal', 'Pizza']));
   }
 
   onAddToList(Answers value) {

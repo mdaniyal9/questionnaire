@@ -103,7 +103,7 @@ class QuestionnaireVU extends ViewModelBuilderWidget<QuestionnaireViewModel> {
           ElevatedButton(
             onPressed: () {
               // viewModel.focus.requestFocus();
-              // viewModel.answers.clear();
+              viewModel.answers.clear();
               viewModel.notificationController.sink.add('GetData');
               viewModel.addData();
             },

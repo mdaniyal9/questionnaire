@@ -5,47 +5,36 @@ import 'package:stacked/stacked.dart';
 import '../../../models/get_questionnaire_model.dart';
 
 class MultiChoiceViewModel extends BaseViewModel{
-  List<String> selectedOptions = [];
+
+  MultiChoiceViewModel(this.questionnaire);
+  GetQuestionnaire questionnaire;
 
 
     onClickCheckBox( GetQuestionnaire questionnaire, int index, v, ){
       if (v == true){
       questionnaire.options![index].isCheck = v!;
-      List<Options>? options = questionnaire.options;
-      List<String>? option = options!
-          .map((op) {
-        return op.option;
-      })
-          .cast<String>()
-          .toList();
 
       if(!isDataExist(questionnaire.options![index].option!)){
-        selectedOptions.add(questionnaire.options![index].option!);
+        questionnaire.selectedOption!.add(questionnaire.options![index].option!);
       };
-      questionnaire.selectedOption = selectedOptions;
-      // answer = Answers(question: questionnaire.question, answerType : questionnaire.answerType, selectedOption : selectedOptions, options: option);
     }else{
         questionnaire.options![index].isCheck = v!;
-        List<Options>? options = questionnaire.options;
-        List<String>? option = options!
-            .map((op) {
-          return op.option;
-        })
-            .cast<String>()
-            .toList();
+
         if(isDataExist(questionnaire.options![index].option!)){
-          selectedOptions.remove(questionnaire.options![index].option!);
+          questionnaire.selectedOption!.remove(questionnaire.options![index].option!);
         };
-        questionnaire.selectedOption = selectedOptions;
-        // answer = Answers(question: questionnaire.question, answerType : questionnaire.answerType, selectedOption : selectedOptions, options: option);
       }
 
     notifyListeners();
   }
 
+  bool isChecked(String value){
+    return isDataExist(value);
+  }
+
 bool isDataExist(String value) {
-  // var data = answers.where((row) => (answers.contains(value)));
-  var data = selectedOptions.where((row) => (selectedOptions.contains(value)));
+  // var data = selectedOptions.where((row) => (selectedOptions.contains(value)));
+  var data = questionnaire.selectedOption!.where((row) => (questionnaire.selectedOption!.contains(value)));
   if (data.length >= 1) {
     return true;
   } else {

@@ -5,8 +5,8 @@ import '../../../models/get_questionnaire_model.dart';
 import 'multi_choice_vm.dart';
 
 class MultiChoiceVU extends ViewModelBuilderWidget<MultiChoiceViewModel> {
-   const MultiChoiceVU( this.questionnaire,  {Key? key}) : super(key: key);
-  final GetQuestionnaire questionnaire;
+   MultiChoiceVU( this.questionnaire,  {Key? key}) : super(key: key);
+  GetQuestionnaire questionnaire;
 
   @override
   Widget builder(BuildContext context, MultiChoiceViewModel viewModel, Widget? child) {
@@ -18,7 +18,7 @@ class MultiChoiceVU extends ViewModelBuilderWidget<MultiChoiceViewModel> {
               return CheckboxListTile(
                   controlAffinity: ListTileControlAffinity.leading,
                   title: Text(questionnaire.options![index].option!),
-                  value: questionnaire.options![index].isCheck,
+                  value: viewModel.isChecked(questionnaire.options![index].option!),//questionnaire.options![index].isCheck,
                   onChanged: (v){
                     viewModel.onClickCheckBox(questionnaire, index, v);
                   });
@@ -28,7 +28,7 @@ class MultiChoiceVU extends ViewModelBuilderWidget<MultiChoiceViewModel> {
   
   @override
   MultiChoiceViewModel viewModelBuilder(BuildContext context) {
-    return MultiChoiceViewModel();
+    return MultiChoiceViewModel(questionnaire);
   }
 
 }
